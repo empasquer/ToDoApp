@@ -28,7 +28,7 @@ public class HomeController {
     @PostMapping("/addTodo")
     public String addTask(@RequestParam String content) {
         Todo todo = new Todo(content);
-        todoService.save(todo);
+        todoService.addTodo(todo);
         return "redirect:/";
     }
 

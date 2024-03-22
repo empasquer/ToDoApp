@@ -31,6 +31,12 @@ public class TodoRepository {
         }
     }
 
+    public void addTodo(Todo todo) {
+        String insertSql = "INSERT INTO todo (content, completed) VALUES (?, ?)";
+        jdbcTemplate.update(insertSql, todo.getContent(), todo.isCompleted() ? 1 : 0);
+    }
+
+
 
 
     public Todo findById(int id) {

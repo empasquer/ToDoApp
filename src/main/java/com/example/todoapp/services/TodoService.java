@@ -29,4 +29,8 @@ public class TodoService {
     public void deleteById(int id) {
         todoRepository.deleteById(id);
     }
+
+    public void addTodo(Todo todo) {
+        todoRepository.addTodo(todo);
+    }
 }
