@@ -69,6 +69,18 @@ body {
     text-decoration: line-through;
 }
 
+/*.delete-button {
+    padding: 5px 10px;
+    background-color: #FF0000; !* Red *!
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 10px;
+}*/
+
+/* Delete button styles */
 .delete-button {
     padding: 5px 10px;
     background-color: #FF0000; /* Red */
@@ -78,4 +90,11 @@ body {
     cursor: pointer;
     font-size: 14px;
     margin-left: 10px;
+}
+
+/* Trash icon styles */
+.delete-button i {
+    /* Adjust the size and color of the trash icon */
+    font-size: 18px;
+    color: #000000; /* White */
 }
