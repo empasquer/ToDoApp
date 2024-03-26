@@ -34,11 +34,11 @@
                 <button type="submit" class="category-button" th:text="${todo.category}"></button>
             </form>
 
-            <div class="user-details">
+<!--            <div class="user-details">
                 <a th:href="@{'/user/' + ${userService.findUserById(post.userId).username}}">
                     @<span th:text="${userService.findUserById(post.userId).username}"></span>
                 </a>
-            </div>
+            </div>-->
 
 
             <form th:action="@{/deleteTodo}" method="post" style="display: inline;">
