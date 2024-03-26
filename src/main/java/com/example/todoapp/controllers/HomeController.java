@@ -68,11 +68,13 @@ public class HomeController {
     public String getTodosByCategory(@RequestParam(required = false) String category, Model model) {
         List<Todo> todos;
         if (category != null && !category.isEmpty()) {
+            // If category is specified, fetch todos by category
             todos = todoService.getTodosByCategory(category);
         } else {
+            // If category is not specified, fetch all todos
             todos = todoService.getTodos();
         }
         model.addAttribute("todos", todos);
-        return "home/index";
+        return "home/index"; // Assuming the view name is "home/index"
     }
 }
