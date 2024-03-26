@@ -9,17 +9,26 @@
 <body>
 <h1 class="title">Em's To-Do App</h1>
 
-<!-- Category filter buttons -->
 <div class="category-filter">
     <a th:href="@{/todos}" class="category-button">All</a>
-    <a th:each="category : ${categories}" th:href="@{/todos(category=${category})}" class="category-button" th:text="${category}"></a>
+    <a th:each="category : ${categories}" th:if="${category != ''}" th:href="@{/todos(category=${category})}" class="category-button" th:text="${category}"></a>
+
 </div>
 
 <form class="todo-form" th:action="@{/addTodo}" method="post">
     <input type="text" name="content" placeholder="Enter todo" class="todo-input" required>
-    <input type="text" name="category" placeholder="Category" class="category-input">
+
+    <select name="category" class="category-input">
+        <option value="">Select category...</option>
+        <option th:each="category : ${categories}" th:if="${category != ''}" th:value="${category}" th:text="${category}"></option>
+    </select>
+
+    <!-- Input field for entering new category -->
+    <input type="text" name="newCategory" placeholder="New category" class="category-input">
+
     <button type="submit" class="add-button">Add Todo</button>
 </form>
+
 
 <form th:action="@{/completeTodo}" method="post">
     <ul class="todo-list">

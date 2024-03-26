@@ -18,6 +18,10 @@ public class TodoService {
         return todoRepository.getTodos();
     }
 
+    public List<String> getAllCategories() {
+        return todoRepository.getAllCategories();
+    }
+
     public void save(Todo todo) {
         todoRepository.save(todo);
     }

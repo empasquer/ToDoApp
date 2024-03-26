@@ -6,11 +6,10 @@ import com.example.todoapp.services.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class HomeController {
@@ -21,25 +20,64 @@ public class HomeController {
     @Autowired
     TodoRepository todoRepository;
 
-    // Handler for displaying all todos
     @GetMapping("/")
     public String index(Model model) {
-        // Retrieve all todos
-        List<Todo> todos = todoService.getTodos();
+        List<String> categories = todoService.getAllCategories();
+        // Filter out empty or null categories
+        categories = categories.stream()
+                .filter(category -> category != null && !category.isEmpty())
+                .collect(Collectors.toList());
+        model.addAttribute("categories", categories);
+        model.addAttribute("todos", todoService.getTodos());
+        return "home/index";
+    }
+
+    @GetMapping(value = {"/todos", "/todos/**"})
+    public String getTodosByCategory(@RequestParam(required = false) String category, Model model) {
+        List<Todo> todos;
+        if (category != null && !category.isEmpty()) {
+            // Get todos filtered by category
+            todos = todoService.getTodosByCategory(category);
+        } else {
+            // Get all todos
+            todos = todoService.getTodos();
+        }
+
+
         // Add todos to the model
         model.addAttribute("todos", todos);
+
+        List<String> categories = todoService.getAllCategories();
+        // Filter out empty or null categories
+        categories = categories.stream()
+                .filter(categoryInCategories -> category != null && !category.isEmpty())
+                .collect(Collectors.toList());
+
+        model.addAttribute("categories", categories);
+
         return "/home/index";
     }
 
-    // Handler for adding a todo
     @PostMapping("/addTodo")
-    public String addTodo(@RequestParam String content, @RequestParam(required = false) String category) {
+    public String addTodo(@RequestParam String content,
+                          @RequestParam(required = false) String category,
+                          @RequestParam(required = false) String newCategory) {
         // Create a new todo instance
         Todo todo = new Todo();
         todo.setContent(content);
-        todo.setCategory(category);
+
+        // Determine the category
+        if (newCategory != null && !newCategory.isEmpty()) {
+            // If a new category is provided, use it
+            todo.setCategory(newCategory);
+        } else {
+            // If an existing category is selected, use it
+            todo.setCategory(category);
+        }
+
         // Add the todo
         todoService.addTodo(todo);
+
         return "redirect:/";
     }
 
@@ -64,7 +102,7 @@ public class HomeController {
     }
 
 
-    @GetMapping("/todos")
+  /*  @GetMapping("/todos")
     public String getTodosByCategory(@RequestParam(required = false) String category, Model model) {
         List<Todo> todos;
         if (category != null && !category.isEmpty()) {
@@ -76,5 +114,5 @@ public class HomeController {
         }
         model.addAttribute("todos", todos);
         return "home/index"; // Assuming the view name is "home/index"
-    }
+    }*/
 }

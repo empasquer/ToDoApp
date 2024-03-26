@@ -1,8 +1,8 @@
 /* Body styles */
 body {
     font-family: 'Courier New', Courier, monospace;
-    background-color: #000;
-    color: #00FF00; /* Matrix green */
+    background-color: #f0f0f0; /* White-ish background */
+    color: #000; /* Black-ish text */
     margin: 0;
     padding: 20px;
 }
@@ -12,7 +12,7 @@ body {
     text-align: center;
     margin-bottom: 20px;
     font-size: 36px;
-    color: #00FF00; /* Matrix green */
+    color: #000; /* Black */
 }
 
 /* Form styles */
@@ -26,18 +26,18 @@ body {
     padding: 10px;
     width: 300px;
     margin-right: 10px;
-    border: 1px solid #00FF00; /* Matrix green */
+    border: 1px solid #00FF00; /* Neon green border */
     border-radius: 5px;
     font-size: 16px;
     box-sizing: border-box;
-    background-color: #000;
-    color: #00FF00; /* Matrix green */
+    background-color: #fff; /* White background */
+    color: #000; /* Black text */
 }
 
 .add-button {
     padding: 10px 20px;
-    background-color: #00FF00; /* Matrix green */
-    color: #000;
+    background-color: #00FF00; /* Neon green */
+    color: #000; /* Black text */
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -73,7 +73,7 @@ body {
 .delete-button {
     padding: 5px 10px;
     background-color: #FF0000; /* Red */
-    color: #000;
+    color: #000; /* Black text */
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -85,14 +85,27 @@ body {
 .delete-button i {
     /* Adjust the size and color of the trash icon */
     font-size: 18px;
-    color: #000000; /* Black */
+    color: #000; /* Black */
 }
 
-.todo-category {
-    display: inline-block;
-    padding: 5px 10px;
-    background-color: #00FF00; /* Neon green */
-    color: #000; /* Black */
+/* New styles */
+.category-filter {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.category-button {
+    padding: 10px 20px;
+    background-color: #FF00FF; /* Neon pink */
+    color: #000; /* Black text */
+    border: none;
     border-radius: 5px;
-    margin-left: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.category-link {
+    color: #000; /* Black text */
+    text-decoration: none;
 }

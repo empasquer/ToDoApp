@@ -20,6 +20,11 @@ public class TodoRepository {
         return jdbcTemplate.query(query, rowMapper);
     }
 
+    public List<String> getAllCategories() {
+        String query = "SELECT DISTINCT category FROM todo";
+        return jdbcTemplate.queryForList(query, String.class);
+    }
+
     public void save(Todo todo) {
         if (findById(todo.getId()) != null) {
             // Task with the same ID exists in the database, perform an update
