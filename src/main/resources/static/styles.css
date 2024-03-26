@@ -69,17 +69,6 @@ body {
     text-decoration: line-through;
 }
 
-/*.delete-button {
-    padding: 5px 10px;
-    background-color: #FF0000; !* Red *!
-    color: #000;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-left: 10px;
-}*/
-
 /* Delete button styles */
 .delete-button {
     padding: 5px 10px;
@@ -96,5 +85,14 @@ body {
 .delete-button i {
     /* Adjust the size and color of the trash icon */
     font-size: 18px;
-    color: #000000; /* White */
+    color: #000000; /* Black */
+}
+
+.todo-category {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #00FF00; /* Neon green */
+    color: #000; /* Black */
+    border-radius: 5px;
+    margin-left: 10px;
 }

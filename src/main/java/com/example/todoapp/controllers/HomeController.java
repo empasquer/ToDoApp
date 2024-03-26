@@ -26,11 +26,14 @@ public class HomeController {
     }
 
     @PostMapping("/addTodo")
-    public String addTask(@RequestParam String content) {
-        Todo todo = new Todo(content);
+    public String addTodo(@RequestParam String content, @RequestParam(required = false) String category) {
+        Todo todo = new Todo();
+        todo.setContent(content);
+        todo.setCategory(category);
         todoService.addTodo(todo);
         return "redirect:/";
     }
+
 
     @PostMapping("/completeTodo")
     public String completeTask(@RequestParam("todo_id") int id) {

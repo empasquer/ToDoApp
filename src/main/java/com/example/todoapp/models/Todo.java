@@ -4,6 +4,7 @@ public class Todo {
     private int id;
     private String content;
     private boolean completed;
+    private String category;
 
     public Todo() {
         this.completed = false;
@@ -22,6 +23,10 @@ public class Todo {
         return content;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
     public boolean isCompleted() {
         return completed;
     }
@@ -36,5 +41,9 @@ public class Todo {
 
     public void setCompleted(boolean completed) {
         this.completed = completed;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
