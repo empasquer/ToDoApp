@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,6 +8,13 @@
 </head>
 <body>
 <h1 class="title">Em's To-Do App</h1>
+
+<!-- Category filter buttons -->
+<div class="category-filter">
+    <a th:href="@{/todos}" class="category-button">All</a>
+    <a th:each="category : ${categories}" th:href="@{/todos(category=${category})}" class="category-button" th:text="${category}"></a>
+</div>
+
 <form class="todo-form" th:action="@{/addTodo}" method="post">
     <input type="text" name="content" placeholder="Enter todo" class="todo-input" required>
     <input type="text" name="category" placeholder="Category" class="category-input">
@@ -22,13 +28,25 @@
                    class="todo-checkbox" onchange="this.form.submit()">
             <label th:for="'todo_' + ${todo.id}" th:classappend="${todo.completed} ? 'completed-todo' : ''"
                    th:text="${todo.content}" class="todo-label"></label>
-            <span th:text="${todo.category}" class="todo-category"></span>
+
+
+            <a th:action="@{/todos(category=${todo.category})}" method="get" style="display: inline;">
+                <button type="submit" class="category-button" th:text="${todo.category}"></button>
+            </a>
+
+            <!--save before fucking it up even more-->
+<!--            <div class="user-details">
+                <a th:href="@{'/user/' + ${userService.findUserById(post.userId).username}}">
+                    @<span th:text="${userService.findUserById(post.userId).username}"></span>
+                </a>
+            </div>-->
+
+
             <form th:action="@{/deleteTodo}" method="post" style="display: inline;">
                 <input type="hidden" name="id" th:value="${todo.id}">
                 <button type="submit" class="delete-button"><i class="fas fa-trash"></i></button>
             </form>
         </li>
-
     </ul>
 </form>
 </body>

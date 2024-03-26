@@ -47,4 +47,10 @@ public class TodoRepository {
         String sql = "DELETE FROM todo WHERE id = ?";
         jdbcTemplate.update(sql, id);
     }
+
+    public List<Todo> findByCategory(String category) {
+        String query = "SELECT * FROM todo WHERE category = ?";
+        RowMapper<Todo> rowMapper = new BeanPropertyRowMapper<>(Todo.class);
+        return jdbcTemplate.query(query, rowMapper, category);
+    }
 }

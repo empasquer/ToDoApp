@@ -33,4 +33,8 @@ public class TodoService {
     public void addTodo(Todo todo) {
         todoRepository.addTodo(todo);
     }
+
+    public List<Todo> getTodosByCategory(String category) {
+        return todoRepository.findByCategory(category);
+    }
 }
