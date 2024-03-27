@@ -18,6 +18,10 @@ public class TodoService {
         return todoRepository.getTodos();
     }
 
+    public List<String> getAllCategories() {
+        return todoRepository.getAllCategories();
+    }
+
     public void save(Todo todo) {
         todoRepository.save(todo);
     }
@@ -32,5 +36,33 @@ public class TodoService {
 
     public void addTodo(Todo todo) {
         todoRepository.addTodo(todo);
+    }
+
+    public List<Todo> getTodosByCategory(String category) {
+        return todoRepository.findByCategory(category);
+    }
+
+    public List<Todo> getSortedTodos(boolean ascending) {
+        if (ascending) {
+            // Sort todos from oldest to most recent
+            return todoRepository.getTodosOrderByIdAsc();
+        } else {
+            // Sort todos from most recent to oldest
+            return todoRepository.getTodosOrderByIdDesc();
+        }
+    }
+
+    public List<Todo> getSortedTodosByCompletion(boolean ascending) {
+        if (ascending) {
+            // Sort todos from oldest to most recent
+            return todoRepository.getTodosOrderByCompletedAsc();
+        } else {
+            // Sort todos from most recent to oldest
+            return todoRepository.getTodosOrderByCompletedDesc();
+        }
+    }
+
+    public List<Todo> getTodosByCompletion(boolean completed) {
+        return todoRepository.getTodosByCompletion(completed);
     }
 }

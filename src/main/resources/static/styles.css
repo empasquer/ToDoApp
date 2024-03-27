@@ -1,100 +1,154 @@
+/* Reset default margins and paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 /* Body styles */
 body {
-    font-family: 'Courier New', Courier, monospace;
-    background-color: #000;
-    color: #00FF00; /* Matrix green */
-    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Header styles */
+.header {
+    background-color: #343a40;
     padding: 20px;
+    text-align: center;
+    color: #fff;
 }
 
 /* Title styles */
 .title {
-    text-align: center;
-    margin-bottom: 20px;
     font-size: 36px;
-    color: #00FF00; /* Matrix green */
 }
 
-/* Form styles */
-.todo-form {
-    margin-bottom: 20px;
+/* Content styles */
+.content {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+/* Controls styles */
+.controls {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
 
-.todo-input {
-    padding: 10px;
-    width: 300px;
-    margin-right: 10px;
-    border: 1px solid #00FF00; /* Matrix green */
-    border-radius: 5px;
-    font-size: 16px;
-    box-sizing: border-box;
-    background-color: #000;
-    color: #00FF00; /* Matrix green */
-}
-
-.add-button {
+.sort-button {
     padding: 10px 20px;
-    background-color: #00FF00; /* Matrix green */
-    color: #000;
+    background-color: #007bff;
+    color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
 }
 
-/* List styles */
+/* Category filter styles */
+.category-filter {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.category-button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+/* Todo form styles */
+.todo-form {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.todo-input {
+    flex: 1;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #fff;
+    color: #495057;
+}
+
+.category-input {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #fff;
+    color: #495057;
+    margin-right: 10px;
+}
+
+.add-button {
+    margin-top: .4rem;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Todo list styles */
 .todo-list {
     list-style-type: none;
     padding: 0;
 }
 
-.todo-item {
+.todo-item form  {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 10px;
 }
 
-/* Label and checkbox styles */
-.todo-label {
-    display: inline-block;
-    cursor: pointer;
-    font-size: 18px;
+.todo-item a {
+    padding-right: 2rem;
 }
+
 
 .todo-checkbox {
     margin-right: 10px;
+}
+
+.todo-label {
+    flex: 1;
+    cursor: pointer;
+    font-size: 18px;
 }
 
 .completed-todo {
     text-decoration: line-through;
 }
 
-/*.delete-button {
-    padding: 5px 10px;
-    background-color: #FF0000; !* Red *!
-    color: #000;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-left: 10px;
-}*/
-
 /* Delete button styles */
 .delete-button {
     padding: 5px 10px;
-    background-color: #FF0000; /* Red */
-    color: #000;
+    background-color: #dc3545;
+    color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 14px;
-    margin-left: 10px;
+    margin-left: auto; /* Pushes the delete button to the right */
 }
 
 /* Trash icon styles */
 .delete-button i {
-    /* Adjust the size and color of the trash icon */
     font-size: 18px;
-    color: #000000; /* White */
 }
