@@ -110,11 +110,17 @@ body {
     padding: 0;
 }
 
-.todo-item {
+.todo-item form  {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     margin-bottom: 10px;
 }
+
+.todo-item a {
+    padding-right: 2rem;
+}
+
 
 .todo-checkbox {
     margin-right: 10px;
@@ -139,7 +145,7 @@ body {
     border-radius: 5px;
     cursor: pointer;
     font-size: 14px;
-    margin-left: 10px;
+    margin-left: auto; /* Pushes the delete button to the right */
 }
 
 /* Trash icon styles */
