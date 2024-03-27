@@ -86,11 +86,11 @@ public class HomeController {
     }
 
     @PostMapping("/completeTodo")
-    public String completeTask(@RequestParam("todo_id") int id, @RequestParam("completed") boolean completed) {
+    public String completeTask(@RequestParam("todo_id") int id) {
         Todo todo = todoService.findById(id);
         if (todo != null) {
-            // Update the completion status directly with the boolean value
-            todo.setCompleted(completed);
+            // Toggle the completion status
+            todo.setCompleted(!todo.isCompleted());
             // Save the updated todo item to the database
             todoService.save(todo);
         }
