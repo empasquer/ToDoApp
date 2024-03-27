@@ -85,17 +85,21 @@ public class HomeController {
         return "redirect:/";
     }
 
-    // Handler for marking a todo as completed
     @PostMapping("/completeTodo")
-    public String completeTask(@RequestParam("todo_id") int id) {
+    public String completeTask(@RequestParam("todo_id") int id, @RequestParam("completed") boolean completed) {
         Todo todo = todoService.findById(id);
         if (todo != null) {
-            // Mark task as completed
-            todo.setCompleted(true);
+            // Update the completion status directly with the boolean value
+            todo.setCompleted(completed);
+            // Save the updated todo item to the database
             todoService.save(todo);
         }
         return "redirect:/";
     }
+
+
+
+
 
     // Handler for deleting a todo
     @PostMapping("/deleteTodo")

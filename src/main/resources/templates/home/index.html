@@ -52,8 +52,11 @@
     <form th:action="@{/completeTodo}" method="post">
         <ul class="todo-list">
             <li th:each="todo : ${todos}" class="todo-item">
-                <input type="checkbox" th:id="'todo_' + ${todo.id}" th:name="'todo_id'" th:value="${todo.id}" class="todo-checkbox" onchange="this.form.submit()">
-                <label th:for="'todo_' + ${todo.id}" th:classappend="${todo.completed} ? 'completed-todo' : ''" th:text="${todo.content}" class="todo-label"></label>
+                <input type="checkbox" th:id="'todo_' + ${todo.id}" th:name="'todo_id'" th:value="${todo.id}"
+                       class="todo-checkbox" th:checked="${todo.completed}" onchange="this.form.submit()">
+                <label th:for="'todo_' + ${todo.id}" th:classappend="${todo.completed} ? 'completed-todo' : ''"
+                       th:text="${todo.content}" class="todo-label"></label>
+                <input type="hidden" name="completed" th:value="${todo.completed ? 'false' : 'true'}">
                 <a th:href="@{/todos(category=${todo.category})}" class="category-link" th:text="${todo.category}"></a>
                 <form th:action="@{/deleteTodo}" method="post" style="display: inline;">
                     <input type="hidden" name="id" th:value="${todo.id}">
@@ -62,6 +65,8 @@
             </li>
         </ul>
     </form>
+
+
 </section>
 </body>
 </html>
