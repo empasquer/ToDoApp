@@ -61,4 +61,8 @@ public class TodoService {
             return todoRepository.getTodosOrderByCompletedDesc();
         }
     }
+
+    public List<Todo> getTodosByCompletion(boolean completed) {
+        return todoRepository.getTodosByCompletion(completed);
+    }
 }

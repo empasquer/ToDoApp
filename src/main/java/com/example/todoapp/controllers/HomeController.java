@@ -33,11 +33,16 @@ public class HomeController {
     }
 
     @GetMapping(value = {"/todos", "/todos/**"})
-    public String getTodosByCategory(@RequestParam(required = false) String category, Model model) {
+    public String getTodosByCategory(@RequestParam(required = false) String category,
+                                     @RequestParam(required = false) Boolean completed,
+                                     Model model) {
         List<Todo> todos;
         if (category != null && !category.isEmpty()) {
             // Get todos filtered by category
             todos = todoService.getTodosByCategory(category);
+        } else if (completed != null) {
+            // Get todos filtered by completion status
+            todos = todoService.getTodosByCompletion(completed);
         } else {
             // Get all todos
             todos = todoService.getTodos();

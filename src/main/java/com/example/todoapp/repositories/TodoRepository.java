@@ -82,4 +82,11 @@ public class TodoRepository {
         RowMapper<Todo> rowMapper = new BeanPropertyRowMapper<>(Todo.class);
         return jdbcTemplate.query(query, rowMapper);
     }
+
+    public List<Todo> getTodosByCompletion(boolean completed) {
+        String query = "SELECT * FROM todo WHERE completed = ?";
+        RowMapper<Todo> rowMapper = new BeanPropertyRowMapper<>(Todo.class);
+        return jdbcTemplate.query(query, rowMapper, completed ? 1 : 0);
+    }
+
 }

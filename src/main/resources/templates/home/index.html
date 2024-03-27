@@ -7,58 +7,61 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-<h1 class="title">Em's To-Do App</h1>
-<form th:action="@{/sort}" method="post">
-    <button type="submit" class="sort-button">
-        <span th:if="${ascending}">Sort Newest to Oldest</span>
-        <span th:unless="${ascending}">Sort Oldest to Newest</span>
-    </button>
-</form>
+<header class="header">
+    <h1 class="title">Em's To-Do App</h1>
+</header>
 
-<form th:action="@{/sort}" method="post">
-    <button type="submit" name="sortByCompleted" value="true" class="sort-button">
-        <span th:if="${ascending}">Sort by Completed (Newest to Oldest)</span>
-        <span th:unless="${ascending}">Sort by Completed (Oldest to Newest)</span>
-    </button>
-</form>
+<section class="content">
+    <div class="controls">
+        <form th:action="@{/sort}" method="post">
+            <button type="submit" class="sort-button">
+                <span th:if="${ascending}">Sort Newest to Oldest</span>
+                <span th:unless="${ascending}">Sort Oldest to Newest</span>
+            </button>
+        </form>
 
+        <form th:action="@{/sort}" method="post">
+            <button type="submit" name="sortByCompleted" value="true" class="sort-button">
+                <span th:if="${ascending}">Sort by Completed (Newest to Oldest)</span>
+                <span th:unless="${ascending}">Sort by Completed (Oldest to Newest)</span>
+            </button>
+        </form>
+    </div>
 
+    <div class="category-filter">
+        <a th:href="@{/todos}" class="category-button">All</a>
+        <a th:each="category : ${categories}" th:if="${category != ''}" th:href="@{/todos(category=${category})}" class="category-button" th:text="${category}"></a>
+        <a th:href="@{/todos(completed=true)}" class="category-button">Completed</a>
+        <a th:href="@{/todos(completed=false)}" class="category-button">Not Completed</a>
+    </div>
 
-<div class="category-filter">
-    <a th:href="@{/todos}" class="category-button">All</a>
-    <a th:each="category : ${categories}" th:if="${category != ''}" th:href="@{/todos(category=${category})}" class="category-button" th:text="${category}"></a>
+    <form class="todo-form" th:action="@{/addTodo}" method="post">
+        <input type="text" name="content" placeholder="Enter todo" class="todo-input" required>
 
-</div>
+        <select name="category" class="category-input">
+            <option value="">Select category...</option>
+            <option th:each="category : ${categories}" th:if="${category != ''}" th:value="${category}" th:text="${category}"></option>
+        </select>
 
-<form class="todo-form" th:action="@{/addTodo}" method="post">
-    <input type="text" name="content" placeholder="Enter todo" class="todo-input" required>
+        <!-- Input field for entering new category -->
+        <input type="text" name="newCategory" placeholder="New category" class="category-input">
 
-    <select name="category" class="category-input">
-        <option value="">Select category...</option>
-        <option th:each="category : ${categories}" th:if="${category != ''}" th:value="${category}" th:text="${category}"></option>
-    </select>
+        <button type="submit" class="add-button">Add Todo</button>
+    </form>
 
-    <!-- Input field for entering new category -->
-    <input type="text" name="newCategory" placeholder="New category" class="category-input">
-
-    <button type="submit" class="add-button">Add Todo</button>
-</form>
-
-
-<form th:action="@{/completeTodo}" method="post">
-    <ul class="todo-list">
-        <li th:each="todo : ${todos}" class="todo-item">
-            <input type="checkbox" th:id="'todo_' + ${todo.id}" th:name="'todo_id'" th:value="${todo.id}"
-                   class="todo-checkbox" onchange="this.form.submit()">
-            <label th:for="'todo_' + ${todo.id}" th:classappend="${todo.completed} ? 'completed-todo' : ''"
-                   th:text="${todo.content}" class="todo-label"></label>
-            <a th:href="@{/todos(category=${todo.category})}" class="category-link" th:text="${todo.category}"></a>
-            <form th:action="@{/deleteTodo}" method="post" style="display: inline;">
-                <input type="hidden" name="id" th:value="${todo.id}">
-                <button type="submit" class="delete-button"><i class="fas fa-trash"></i></button>
-            </form>
-        </li>
-    </ul>
-</form>
+    <form th:action="@{/completeTodo}" method="post">
+        <ul class="todo-list">
+            <li th:each="todo : ${todos}" class="todo-item">
+                <input type="checkbox" th:id="'todo_' + ${todo.id}" th:name="'todo_id'" th:value="${todo.id}" class="todo-checkbox" onchange="this.form.submit()">
+                <label th:for="'todo_' + ${todo.id}" th:classappend="${todo.completed} ? 'completed-todo' : ''" th:text="${todo.content}" class="todo-label"></label>
+                <a th:href="@{/todos(category=${todo.category})}" class="category-link" th:text="${todo.category}"></a>
+                <form th:action="@{/deleteTodo}" method="post" style="display: inline;">
+                    <input type="hidden" name="id" th:value="${todo.id}">
+                    <button type="submit" class="delete-button"><i class="fas fa-trash"></i></button>
+                </form>
+            </li>
+        </ul>
+    </form>
+</section>
 </body>
 </html>
