@@ -15,6 +15,15 @@
     </button>
 </form>
 
+<form th:action="@{/sort}" method="post">
+    <button type="submit" name="sortByCompleted" value="true" class="sort-button">
+        <span th:if="${ascending}">Sort by Completed (Newest to Oldest)</span>
+        <span th:unless="${ascending}">Sort by Completed (Oldest to Newest)</span>
+    </button>
+</form>
+
+
+
 <div class="category-filter">
     <a th:href="@{/todos}" class="category-button">All</a>
     <a th:each="category : ${categories}" th:if="${category != ''}" th:href="@{/todos(category=${category})}" class="category-button" th:text="${category}"></a>

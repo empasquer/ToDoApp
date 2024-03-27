@@ -70,4 +70,16 @@ public class TodoRepository {
         RowMapper<Todo> rowMapper = new BeanPropertyRowMapper<>(Todo.class);
         return jdbcTemplate.query(query, rowMapper);
     }
+
+    public List<Todo> getTodosOrderByCompletedAsc() {
+        String query = "SELECT * FROM todo ORDER BY completed ASC, id ASC;";
+        RowMapper<Todo> rowMapper = new BeanPropertyRowMapper<>(Todo.class);
+        return jdbcTemplate.query(query, rowMapper);
+    }
+
+    public List<Todo> getTodosOrderByCompletedDesc() {
+        String query = "SELECT * FROM todo ORDER BY completed DESC, id ASC;";
+        RowMapper<Todo> rowMapper = new BeanPropertyRowMapper<>(Todo.class);
+        return jdbcTemplate.query(query, rowMapper);
+    }
 }

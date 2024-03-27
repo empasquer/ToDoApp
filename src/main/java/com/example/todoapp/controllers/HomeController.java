@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 @Controller
 public class HomeController {
 
@@ -44,16 +43,15 @@ public class HomeController {
             todos = todoService.getTodos();
         }
 
-
         // Add todos to the model
         model.addAttribute("todos", todos);
 
+        // Get all categories
         List<String> categories = todoService.getAllCategories();
         // Filter out empty or null categories
         categories = categories.stream()
-                .filter(categoryInCategories -> category != null && !category.isEmpty())
+                .filter(cat -> cat != null && !cat.isEmpty())
                 .collect(Collectors.toList());
-
         model.addAttribute("categories", categories);
 
         return "/home/index";
@@ -103,30 +101,35 @@ public class HomeController {
     }
 
     @PostMapping("/sort")
-    public String sortNotes(Model model, HttpSession session, @RequestParam(required = false) String category ) {
-        // Toggle sorting order
+    public String sortNotes(Model model, HttpSession session, @RequestParam(required = false) String category,
+                            @RequestParam(required = false) String sortByCompleted) {
+        // Toggle sorting order based on sortByCompleted parameter
         boolean ascending = session.getAttribute("ascending") != null ? (boolean) session.getAttribute("ascending") : false;
-        ascending = !ascending;
+        if (sortByCompleted != null && sortByCompleted.equals("true")) {
+            ascending = !ascending;
+        }
         session.setAttribute("ascending", ascending);
 
         // Get sorted todos based on the sorting order
-        List<Todo> todos = todoService.getSortedTodos(ascending);
+        List<Todo> todos;
+        if (sortByCompleted != null && sortByCompleted.equals("true")) {
+            todos = todoService.getSortedTodosByCompletion(ascending);
+        } else {
+            todos = todoService.getSortedTodos(ascending);
+        }
         model.addAttribute("todos", todos);
         model.addAttribute("ascending", ascending);
 
         // Get all categories
         List<String> categories = todoService.getAllCategories();
-
-        // Filter out empty or null categories only if a specific category is selected
-        if (category != null && !category.isEmpty()) {
-            categories = categories.stream()
-                    .filter(cat -> cat != null && !cat.isEmpty())
-                    .collect(Collectors.toList());
-        }
-
+        // Filter out empty or null categories
+        categories = categories.stream()
+                .filter(cat -> cat != null && !cat.isEmpty())
+                .collect(Collectors.toList());
         model.addAttribute("categories", categories);
 
         return "home/index";
     }
+
 
 }

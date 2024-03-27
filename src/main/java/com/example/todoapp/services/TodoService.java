@@ -51,4 +51,14 @@ public class TodoService {
             return todoRepository.getTodosOrderByIdDesc();
         }
     }
+
+    public List<Todo> getSortedTodosByCompletion(boolean ascending) {
+        if (ascending) {
+            // Sort todos from oldest to most recent
+            return todoRepository.getTodosOrderByCompletedAsc();
+        } else {
+            // Sort todos from most recent to oldest
+            return todoRepository.getTodosOrderByCompletedDesc();
+        }
+    }
 }
