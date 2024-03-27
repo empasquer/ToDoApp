@@ -8,6 +8,12 @@
 </head>
 <body>
 <h1 class="title">Em's To-Do App</h1>
+<form th:action="@{/sort}" method="post">
+    <button type="submit" class="sort-button">
+        <span th:if="${ascending}">Sort Newest to Oldest</span>
+        <span th:unless="${ascending}">Sort Oldest to Newest</span>
+    </button>
+</form>
 
 <div class="category-filter">
     <a th:href="@{/todos}" class="category-button">All</a>

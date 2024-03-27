@@ -3,6 +3,7 @@ package com.example.todoapp.controllers;
 import com.example.todoapp.models.Todo;
 import com.example.todoapp.repositories.TodoRepository;
 import com.example.todoapp.services.TodoService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -101,18 +102,31 @@ public class HomeController {
         return "redirect:/";
     }
 
+    @PostMapping("/sort")
+    public String sortNotes(Model model, HttpSession session, @RequestParam(required = false) String category ) {
+        // Toggle sorting order
+        boolean ascending = session.getAttribute("ascending") != null ? (boolean) session.getAttribute("ascending") : false;
+        ascending = !ascending;
+        session.setAttribute("ascending", ascending);
 
-  /*  @GetMapping("/todos")
-    public String getTodosByCategory(@RequestParam(required = false) String category, Model model) {
-        List<Todo> todos;
-        if (category != null && !category.isEmpty()) {
-            // If category is specified, fetch todos by category
-            todos = todoService.getTodosByCategory(category);
-        } else {
-            // If category is not specified, fetch all todos
-            todos = todoService.getTodos();
-        }
+        // Get sorted todos based on the sorting order
+        List<Todo> todos = todoService.getSortedTodos(ascending);
         model.addAttribute("todos", todos);
-        return "home/index"; // Assuming the view name is "home/index"
-    }*/
+        model.addAttribute("ascending", ascending);
+
+        // Get all categories
+        List<String> categories = todoService.getAllCategories();
+
+        // Filter out empty or null categories only if a specific category is selected
+        if (category != null && !category.isEmpty()) {
+            categories = categories.stream()
+                    .filter(cat -> cat != null && !cat.isEmpty())
+                    .collect(Collectors.toList());
+        }
+
+        model.addAttribute("categories", categories);
+
+        return "home/index";
+    }
+
 }

@@ -58,4 +58,16 @@ public class TodoRepository {
         RowMapper<Todo> rowMapper = new BeanPropertyRowMapper<>(Todo.class);
         return jdbcTemplate.query(query, rowMapper, category);
     }
+
+    public List<Todo> getTodosOrderByIdAsc() {
+        String query = "SELECT * FROM todo ORDER BY id ASC";
+        RowMapper<Todo> rowMapper = new BeanPropertyRowMapper<>(Todo.class);
+        return jdbcTemplate.query(query, rowMapper);
+    }
+
+    public List<Todo> getTodosOrderByIdDesc() {
+        String query = "SELECT * FROM todo ORDER BY id DESC";
+        RowMapper<Todo> rowMapper = new BeanPropertyRowMapper<>(Todo.class);
+        return jdbcTemplate.query(query, rowMapper);
+    }
 }

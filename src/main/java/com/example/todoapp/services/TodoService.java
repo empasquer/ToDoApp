@@ -41,4 +41,14 @@ public class TodoService {
     public List<Todo> getTodosByCategory(String category) {
         return todoRepository.findByCategory(category);
     }
+
+    public List<Todo> getSortedTodos(boolean ascending) {
+        if (ascending) {
+            // Sort todos from oldest to most recent
+            return todoRepository.getTodosOrderByIdAsc();
+        } else {
+            // Sort todos from most recent to oldest
+            return todoRepository.getTodosOrderByIdDesc();
+        }
+    }
 }
